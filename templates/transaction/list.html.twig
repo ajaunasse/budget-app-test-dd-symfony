@@ -1,0 +1,58 @@
+{% extends 'base.html.twig' %}
+
+{% block title %} Transactions {% endblock %}
+
+{% block title_page %} Liste des dernières transactions {% endblock %}
+{% block content %}
+    <div class="list_transactions">
+
+        <a href="{{ path('create_transaction') }}" class="btn btn-success float-end">
+            <i class="fas fa-plus"></i>
+            Ajouter une transactions
+        </a>
+        <table class="table">
+            <thead>
+            <tr>
+                <th>
+                    Id
+                </th>
+                <th>
+                    Name
+                </th>
+                <th>
+                    Montant
+                </th>
+                <th>
+                    Date
+                </th>
+                <th>
+                    Action
+                </th>
+            </tr>
+            </thead>
+            <tbody>
+            {% for transaction in transactions %}
+            <tr>
+                <td>{{ transaction.id }}</td>
+                <td>{{ transaction.name }}</td>
+                <td>{{ transaction.formattedAmount }}</td>
+                <td>{{ transaction.transactionDate|date('Y-m-d') }}</td>
+                <td>
+                    <a href="{{ path('show_transaction', {'id': transaction.id}) }}" class="btn btn-sm btn-outline-primary">
+                        <i class="fas fa-eye"></i>
+                        Détail
+                    </a>
+
+                    <a href="{{ path('delete_transaction', {'id': transaction.id}) }}" class="btn btn-sm btn-outline-danger">
+                        <i class="fas fa-trash-alt"></i>
+                        Supprimer
+                    </a>
+                </td>
+            </tr>
+            {% else %}
+                <tr><td>Pas de transactions</td></tr>
+            {% endfor %}
+            </tbody>
+        </table>
+    </div>
+{% endblock %}

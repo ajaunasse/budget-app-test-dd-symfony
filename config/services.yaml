@@ -1,0 +1,20 @@
+parameters:
+
+services:
+    _defaults:
+        autowire: true
+        autoconfigure: true
+    App\:
+        resource: '../src/'
+        exclude:
+            - '../src/*/DependencyInjection/'
+            - '../src/*/Domain/'
+            - '../src/Kernel.php'
+            - '../src/Tests/'
+
+    App\Transaction\UseCase\:
+        resource: '../src/Transaction/UseCase/'
+        tags: [ 'controller.service_arguments' ]
+
+
+    App\Transaction\Domain\Repository\TransactionRepository: '@App\Transaction\Infrastructure\OrmTransactionRepository'

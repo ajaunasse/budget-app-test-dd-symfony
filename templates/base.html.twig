@@ -1,0 +1,47 @@
+<!doctype html>
+<html lang="fr">
+<head>
+    <title>My Budget | {% block title %}{% endblock %}</title>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    {% block css %}
+        {{ encore_entry_link_tags('app_css') }}
+    {% endblock %}
+</head>
+<body>
+{% block body %}
+    <div class="container-sm">
+        <div class="row">
+            <div class="col-12">
+                <h3>{% block title_page %} {% endblock %}</h3>
+                <hr>
+            </div>
+            <div class="col-12">
+                {% for label, messages in app.flashes(['success', 'warning', 'danger']) %}
+                    {% for message in messages %}
+                        <div class="alert alert-{{ label }}">
+                            {{ message }}
+                        </div>
+                    {% endfor %}
+                {% endfor %}
+            </div>
+
+
+            <div class="col-12">
+                {% block content %}
+                {% endblock %}
+            </div>
+
+        </div>
+    </div>
+
+{% endblock %}
+
+
+{% block js %}
+    {{ encore_entry_script_tags('app_js') }}
+{% endblock %}
+</body>
+</html>

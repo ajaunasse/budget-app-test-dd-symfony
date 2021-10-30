@@ -1,0 +1,20 @@
+{% extends 'base.html.twig' %}
+
+{% block content %}
+    <h2> Transaction n°{{ transaction.id }} </h2>
+
+    <dl>
+        <dt>Nom</dt>
+        <dd>{{ transaction.name }}</dd>
+
+        <dt>Montant</dt>
+        <dd>{{ transaction.formattedAmount }} EUR</dd>
+
+        <dt>Date de la transaction</dt>
+        <dd>{{ transaction.transactionDate|date('Y-m-d') }}</dd>
+
+        <dt>Type</dt>
+        <dd>{{ transaction.type }}</dd>
+    </dl>
+
+{% endblock %}
