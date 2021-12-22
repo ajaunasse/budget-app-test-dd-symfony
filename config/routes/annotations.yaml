@@ -3,5 +3,5 @@ kernel:
     type: annotation
 
 transaction_user_case:
-    resource: ../../src/Transaction/UseCase/
+    resource: ../../src/UserInterface/WebSite/Transaction/Action/
     type: annotation

@@ -12,9 +12,8 @@ services:
             - '../src/Kernel.php'
             - '../src/Tests/'
 
-    App\Transaction\UseCase\:
-        resource: '../src/Transaction/UseCase/'
-        tags: [ 'controller.service_arguments' ]
+    App\UserInterface\WebSite\Transaction\Action\:
+        resource: '../src/UserInterface/WebSite/Transaction/Action/'
+        tags: [ 'controller.service_arguments']
 
-
-    App\Transaction\Domain\Repository\TransactionRepository: '@App\Transaction\Infrastructure\OrmTransactionRepository'
+    App\Core\Transaction\Domain\Repository\TransactionRepository: '@App\Core\Transaction\Infrastructure\Persistence\OrmTransactionRepository'
