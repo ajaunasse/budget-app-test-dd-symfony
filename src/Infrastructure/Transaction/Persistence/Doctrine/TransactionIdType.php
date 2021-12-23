@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace App\Shared\Transaction\Infrastructure\Persistence\Doctrine;
+namespace App\Infrastructure\Transaction\Persistence\Doctrine;
 
 use App\Shared\Transaction\Domain\TransactionId;
 use Doctrine\DBAL\Platforms\AbstractPlatform;

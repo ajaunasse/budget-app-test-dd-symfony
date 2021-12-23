@@ -16,4 +16,21 @@ services:
         resource: '../src/UserInterface/WebSite/Transaction/Action/'
         tags: [ 'controller.service_arguments']
 
+    App\UserInterface\WebSite\BankAccount\Action\:
+        resource: '../src/UserInterface/WebSite/BankAccount/Action/'
+        tags: [ 'controller.service_arguments' ]
+
+    _instanceof:
+        App\Infrastructure\Bus\Command\CommandHandlerInterface:
+            public: true
+            tags:
+                - { name: messenger.message_handler, bus: command.bus }
+
+        App\Infrastructure\Bus\AsyncEvent\AsyncEventHandlerInterface:
+            public: true
+            tags:
+                - { name: messenger.message_handler, bus: event.bus.async }
+
     App\Core\Transaction\Domain\Repository\TransactionRepository: '@App\Core\Transaction\Infrastructure\Persistence\OrmTransactionRepository'
+    App\Core\BankAccount\Domain\Repository\BankAccountRepository: '@App\Core\BankAccount\Infrastructure\Persistence\OrmBankAccountRepository'
+    App\Core\BankAccount\Domain\Repository\BankAccountActivityRepository: '@App\Core\BankAccount\Infrastructure\Persistence\OrmBankAccountActivityRepository'

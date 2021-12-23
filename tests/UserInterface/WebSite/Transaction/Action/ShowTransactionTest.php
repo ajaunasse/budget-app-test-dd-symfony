@@ -2,7 +2,7 @@
 
 namespace App\Tests\UserInterface\WebSite\Transaction\Action;
 
-use App\Shared\Comon\Domain\Uuid;
+use App\Shared\Common\Domain\Uuid;
 use Symfony\Bundle\FrameworkBundle\Test\WebTestCase;
 
 final class ShowTransactionTest extends WebTestCase

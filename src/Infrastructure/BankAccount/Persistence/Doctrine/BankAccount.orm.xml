@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<doctrine-mapping xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+                  xmlns="http://doctrine-project.org/schemas/orm/doctrine-mapping"
+                  xsi:schemaLocation="http://doctrine-project.org/schemas/orm/doctrine-mapping
+                          https://www.doctrine-project.org/schemas/orm/doctrine-mapping.xsd">
+
+    <entity name="App\Core\BankAccount\Domain\Model\BankAccount" table="bank_account">
+
+        <id name="id" type="bank_account_id" column="id" length="36" />
+
+        <field name="name" column="name" type="string" length="50" />
+        <field name="startBalance" column="start_balance" type="integer" />
+        <field name="currentBalance" column="current_balance" type="integer" />
+        <field name="type" column="type" type="bank_account_type" length="20" />
+        <field name="mainAccount" column="main_account" type="boolean" />
+        <field name="createdAt" column="created_at" type="date_immutable" />
+        <field name="updatedAt" column="updated_at" type="date_immutable" />
+    </entity>
+
+</doctrine-mapping>

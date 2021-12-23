@@ -2,6 +2,10 @@ kernel:
     resource: ../../src/Kernel.php
     type: annotation
 
-transaction_user_case:
+transaction_actions:
     resource: ../../src/UserInterface/WebSite/Transaction/Action/
+    type: annotation
+
+bank_account_actions:
+    resource: ../../src/UserInterface/WebSite/BankAccount/Action/
     type: annotation

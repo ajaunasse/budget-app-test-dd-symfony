@@ -133,6 +133,9 @@
     "myclabs/deep-copy": {
         "version": "1.10.2"
     },
+    "myclabs/php-enum": {
+        "version": "1.8.3"
+    },
     "netresearch/jsonmapper": {
         "version": "v4.0.0"
     },
@@ -682,6 +685,9 @@
     },
     "twig/extra-bundle": {
         "version": "v3.3.3"
+    },
+    "twig/intl-extra": {
+        "version": "v3.3.4"
     },
     "twig/twig": {
         "version": "v3.3.3"

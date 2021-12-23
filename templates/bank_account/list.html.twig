@@ -1,0 +1,59 @@
+{% extends 'base.html.twig' %}
+
+{% block title %} Mes comptes {% endblock %}
+
+{% block title_page %} Mes comptes {% endblock %}
+{% block content %}
+    <div class="list_bank_accounts">
+
+        <a href="{{ path('add_bank_account') }}" class="btn btn-success float-end">
+            <i class="fas fa-plus"></i>
+            Ajouter un compte
+        </a>
+        <table class="table">
+            <thead>
+            <tr>
+                <th>
+                    Id
+                </th>
+                <th>
+                    Name
+                </th>
+                <th>
+                    type
+                </th>
+                <th>
+                    Solde
+                </th>
+                <th>
+                    Date de création
+                </th>
+                <th>
+                    Dernière mise à jour
+                </th>
+                <th>
+                    Action
+                </th>
+            </tr>
+            </thead>
+            <tbody>
+            {% for bankAccount in bankAccounts %}
+            <tr>
+                <td>{{ bankAccount.id }}</td>
+                <td>{{ bankAccount.name }}</td>
+                <td>{{ bankAccount.type }}</td>
+                <td>{{ bankAccount.formattedCurrentBalance | format_currency('EUR',{}, 'fr' ) }}</td>
+                <td>
+                    {{ bankAccount.createdAt | format_date }}
+                </td>
+                <td>
+                    {{ bankAccount.updatedAt | format_date }}
+                </td>
+            </tr>
+            {% else %}
+                <tr><td>Pas de compte bancaire</td></tr>
+            {% endfor %}
+            </tbody>
+        </table>
+    </div>
+{% endblock %}

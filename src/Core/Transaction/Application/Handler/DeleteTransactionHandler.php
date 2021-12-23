@@ -6,9 +6,9 @@ namespace App\Core\Transaction\Application\Handler;
 
 use App\Core\Transaction\Application\Command\DeleteTransactionCommand;
 use App\Core\Transaction\Domain\Repository\TransactionRepository;
-use Symfony\Component\Messenger\Handler\MessageHandlerInterface;
+use App\Infrastructure\Bus\Command\CommandHandlerInterface;
 
-final class DeleteTransactionHandler implements MessageHandlerInterface
+final class DeleteTransactionHandler implements CommandHandlerInterface
 {
     public function __construct(private TransactionRepository $transactionRepository)
     {

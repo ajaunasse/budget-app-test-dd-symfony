@@ -7,10 +7,9 @@ namespace App\Core\Transaction\Application\Handler;
 use App\Core\Transaction\Application\Command\CreateTransactionCommand;
 use App\Core\Transaction\Domain\Model\Transaction;
 use App\Core\Transaction\Domain\Repository\TransactionRepository;
-use App\Shared\Transaction\Domain\TransactionId;
-use Symfony\Component\Messenger\Handler\MessageHandlerInterface;
+use App\Infrastructure\Bus\Command\CommandHandlerInterface;
 
-final class CreateTransactionHandler implements MessageHandlerInterface
+final class CreateTransactionHandler implements CommandHandlerInterface
 {
     public function __construct(private TransactionRepository $transactionRepository)
     {

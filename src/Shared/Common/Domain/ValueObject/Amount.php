@@ -2,10 +2,10 @@
 
 declare(strict_types=1);
 
-namespace App\Core\Transaction\Domain\ValueObject;
+namespace App\Shared\Common\Domain\ValueObject;
 
-use App\Core\Transaction\Domain\Exception\AmountCannotBeNegative;
-use App\Core\Transaction\Domain\Exception\AmountCannotBeNull;
+use App\Shared\Common\Domain\Exception\AmountCannotBeNegative;
+use App\Shared\Common\Domain\Exception\AmountCannotBeNull;
 
 final class Amount
 {

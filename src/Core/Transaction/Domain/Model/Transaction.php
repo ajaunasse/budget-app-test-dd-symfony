@@ -5,9 +5,9 @@ declare(strict_types=1);
 namespace App\Core\Transaction\Domain\Model;
 
 use App\Core\Transaction\Domain\Exception\TransactionTypeNotExist;
-use App\Core\Transaction\Domain\ValueObject\Amount;
-use DateTimeImmutable;
+use App\Shared\Common\Domain\ValueObject\Amount;
 use App\Shared\Transaction\Domain\TransactionId;
+use DateTimeImmutable;
 
 final class Transaction
 {
@@ -19,7 +19,7 @@ final class Transaction
         2 => self::CREDIT,
     ];
 
-    private TransactionId $id ;
+    private TransactionId $id;
 
     private string $name;
 

@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace App\Shared\Comon\Domain;
+namespace App\Shared\Common\Domain;
 
 use InvalidArgumentException;
 use Stringable;

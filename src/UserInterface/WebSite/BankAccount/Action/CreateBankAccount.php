@@ -2,10 +2,10 @@
 
 declare(strict_types=1);
 
-namespace App\UserInterface\WebSite\Transaction\Action;
+namespace App\UserInterface\WebSite\BankAccount\Action;
 
-use App\Core\Transaction\Application\Command\CreateTransactionCommand;
-use App\Shared\Common\Domain\Uuid;
+use App\Core\BankAccount\Application\Command\CreateBankAccountCommand;
+use App\UserInterface\WebSite\BankAccount\Form\CreateBankAccountType;
 use Symfony\Component\Form\FormFactoryInterface;
 use Symfony\Component\HttpFoundation\RedirectResponse;
 use Symfony\Component\HttpFoundation\Request;
@@ -19,9 +19,9 @@ use Twig\Environment;
 use App\UserInterface\WebSite\Transaction\Form\CreateTransactionType;
 
 /**
- * @Route("/transaction/create", name="create_transaction")
+ * @Route("/bank-account/add", name="add_bank_account")
  */
-final class CreateTransaction
+final class CreateBankAccount
 {
     private SessionInterface $session;
 
@@ -38,7 +38,7 @@ final class CreateTransaction
     public function __invoke(Request $request): Response
     {
 
-        $form = $this->formFactory->create(CreateTransactionType::class);
+        $form = $this->formFactory->create(CreateBankAccountType::class);
 
         $form->handleRequest($request);
 
@@ -46,14 +46,14 @@ final class CreateTransaction
 
         if ($form->isSubmitted() && $form->isValid()) {
             try {
-                $command = CreateTransactionCommand::fromFormData($form->getData());
+                $command = CreateBankAccountCommand::fromFormData($form->getData());
 
                 $this->commandBus->dispatch($command);
 
                 /* @phpstan-ignore-next-line */
-                $this->session->getFlashBag()->add('success', 'Transaction prise en compte');
+                $this->session->getFlashBag()->add('success', 'Compte bancaire créé');
 
-                return new RedirectResponse($this->router->generate('list_transaction'));
+                return new RedirectResponse($this->router->generate('list_bank_account'));
             } catch (\Exception $e) {
 
                 /* @phpstan-ignore-next-line */
@@ -61,7 +61,7 @@ final class CreateTransaction
             }
         }
 
-        $response->setContent($this->twig->render('transaction/create.html.twig', [
+        $response->setContent($this->twig->render('bank_account/create.html.twig', [
             'form' => $form->createView(),
         ]));
 

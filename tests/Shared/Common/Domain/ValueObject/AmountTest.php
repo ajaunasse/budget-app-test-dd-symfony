@@ -2,11 +2,11 @@
 
 declare(strict_types=1);
 
-namespace App\Tests\Core\Transaction\Domain;
+namespace App\Tests\Shared\Common\Domain\ValueObject;
 
-use App\Core\Transaction\Domain\Exception\AmountCannotBeNegative;
-use App\Core\Transaction\Domain\Exception\AmountCannotBeNull;
-use App\Core\Transaction\Domain\ValueObject\Amount;
+use App\Shared\Common\Domain\Exception\AmountCannotBeNegative;
+use App\Shared\Common\Domain\Exception\AmountCannotBeNull;
+use App\Shared\Common\Domain\ValueObject\Amount;
 use PHPUnit\Framework\TestCase;
 
 final class AmountTest extends TestCase
