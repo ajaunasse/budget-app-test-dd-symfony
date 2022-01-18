@@ -5,8 +5,8 @@ declare(strict_types=1);
 namespace App\Core\Transaction\Application\Command;
 
 use App\Core\Transaction\Domain\Model\Transaction;
-use App\Shared\Common\Domain\ValueObject\Amount;
 use App\Shared\Common\Domain\Uuid;
+use App\Shared\Common\Domain\ValueObject\Amount;
 use App\Shared\Transaction\Domain\TransactionId;
 use DateTimeImmutable;
 

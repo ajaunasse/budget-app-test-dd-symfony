@@ -32,7 +32,7 @@ final class OrmTransactionRepository extends ServiceEntityRepository implements 
      */
     public function get(TransactionId $transactionId): Transaction
     {
-        $transaction = $this->findOneById($transactionId->value());
+        $transaction = $this->find($transactionId);
 
         if (null == $transaction) {
             throw new TransactionNotFound($transactionId);

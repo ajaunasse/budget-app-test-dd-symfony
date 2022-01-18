@@ -2,8 +2,10 @@
 
 namespace App\Tests\UserInterface\WebSite\Transaction\Action;
 
+use App\Core\Transaction\Application\Command\CreateTransactionCommand;
 use DateTimeImmutable;
 use Symfony\Bundle\FrameworkBundle\Test\WebTestCase;
+use Symfony\Component\Messenger\TraceableMessageBus;
 
 final class CreateTransactionTest extends WebTestCase
 {
@@ -46,18 +48,34 @@ final class CreateTransactionTest extends WebTestCase
             'create_transaction[transactionDate]' => $transactionDate->format('Y-m-d'),
             'create_transaction[type]' => $transactionType,
         ];
+        $formData = [
+            'name' => $transactionName,
+            'amount' => $transactionAmount,
+            'transactionDate' => $transactionDate,
+            'type' => $transactionType,
+        ];
 
         $client->request('GET', '/transaction/create');
 
+        $expectedCommand = CreateTransactionCommand::fromFormData($formData);
+
         $client->submitForm('Submit', $formValue);
 
-        $this->assertResponseRedirects('/transaction/list');
+        self::assertTrue(self::getContainer()->has('command.bus'));
+
+        /** @var TraceableMessageBus $transport */
+        $transport = self::getContainer()->get('command.bus');
+
+        self::assertResponseRedirects('/transaction/list');
 
         $client->followRedirect();
 
         $responseContent = $client->getResponse()->getContent();
+        self::assertStringContainsString('Transaction prise en compte', $responseContent);
+        $message = $transport->getDispatchedMessages()[0]['message'];
 
-        $this->assertStringContainsString('Transaction prise en compte', $responseContent);
+        self::assertInstanceOf(CreateTransactionCommand::class, $message);
+        self::assertSame($expectedCommand->name(), $message->name());
     }
 
     /**

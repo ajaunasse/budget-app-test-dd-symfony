@@ -24,13 +24,9 @@ final class BankAccountActivityTypeType extends StringType
 
     /**
      * @param BankAccountActivityType $value
-     * @param AbstractPlatform $platform
-     * @return string
      */
     public function convertToDatabaseValue($value, AbstractPlatform $platform): string
     {
         return $value->getValue();
     }
-
-
 }

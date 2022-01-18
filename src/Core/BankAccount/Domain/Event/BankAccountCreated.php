@@ -1,10 +1,11 @@
 <?php
 
-namespace App\Core\BankAccount\Application\Event;
+namespace App\Core\BankAccount\Domain\Event;
 
 use App\Shared\BankAccount\Domain\BankAccountId;
+use App\Shared\Common\Domain\Model\DomainEventInterface;
 
-final class BankAccountCreated
+final class BankAccountCreated implements DomainEventInterface
 {
     public function __construct(
         private BankAccountId $bankAccountId,
@@ -27,6 +28,4 @@ final class BankAccountCreated
     {
         return $this->occuredAt;
     }
-
-
 }

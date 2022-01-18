@@ -2,7 +2,7 @@
 
 namespace App\Core\BankAccount\Application\Handler;
 
-use App\Core\BankAccount\Application\Event\BankAccountCreated;
+use App\Core\BankAccount\Domain\Event\BankAccountCreated;
 use App\Core\BankAccount\Domain\Model\BankAccountActivity;
 use App\Core\BankAccount\Domain\Repository\BankAccountActivityRepository;
 use App\Infrastructure\Bus\AsyncEvent\AsyncEventHandlerInterface;

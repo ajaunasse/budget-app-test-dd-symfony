@@ -4,14 +4,13 @@ declare(strict_types=1);
 
 namespace App\UserInterface\WebSite\Transaction\Action;
 
-use App\Core\Transaction\Domain\Exception\TransactionNotFound;
 use App\Core\Transaction\Domain\Repository\TransactionRepository;
 use App\Shared\Transaction\Domain\TransactionId;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 use Twig\Environment;
-
+use Exception;
 /**
  * @Route(
  *     "/transaction/show/{id}",
@@ -32,7 +31,8 @@ final class ShowTransaction
             $transaction = $this->transactionRepository
                 ->get(new TransactionId($id))
             ;
-        } catch (TransactionNotFound $e) {
+
+        } catch (Exception $e) {
             return new Response($e->getMessage(), Response::HTTP_NOT_FOUND);
         }
 

@@ -29,7 +29,17 @@ services:
         App\Infrastructure\Bus\AsyncEvent\AsyncEventHandlerInterface:
             public: true
             tags:
-                - { name: messenger.message_handler, bus: event.bus.async }
+                - { name: messenger.message_handler, bus: event.bus }
+
+    event_handlers:
+        namespace: App\Core\
+        resource: '%kernel.project_dir%/src/Core/**/Application/**/*EventHandler.php'
+        autoconfigure: false
+        tags:
+            - { name: messenger.message_handler, bus: event.bus }
+
+    App\Infrastructure\Doctrine\DomainEventSubscriber:
+        tags: [ { name: 'doctrine.event_subscriber' } ]
 
     App\Core\Transaction\Domain\Repository\TransactionRepository: '@App\Core\Transaction\Infrastructure\Persistence\OrmTransactionRepository'
     App\Core\BankAccount\Domain\Repository\BankAccountRepository: '@App\Core\BankAccount\Infrastructure\Persistence\OrmBankAccountRepository'

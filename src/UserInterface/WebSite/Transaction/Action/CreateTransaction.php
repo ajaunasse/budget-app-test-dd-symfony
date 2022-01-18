@@ -5,7 +5,7 @@ declare(strict_types=1);
 namespace App\UserInterface\WebSite\Transaction\Action;
 
 use App\Core\Transaction\Application\Command\CreateTransactionCommand;
-use App\Shared\Common\Domain\Uuid;
+use App\UserInterface\WebSite\Transaction\Form\CreateTransactionType;
 use Symfony\Component\Form\FormFactoryInterface;
 use Symfony\Component\HttpFoundation\RedirectResponse;
 use Symfony\Component\HttpFoundation\Request;
@@ -16,7 +16,6 @@ use Symfony\Component\Messenger\MessageBusInterface;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Component\Routing\RouterInterface;
 use Twig\Environment;
-use App\UserInterface\WebSite\Transaction\Form\CreateTransactionType;
 
 /**
  * @Route("/transaction/create", name="create_transaction")
@@ -37,7 +36,6 @@ final class CreateTransaction
 
     public function __invoke(Request $request): Response
     {
-
         $form = $this->formFactory->create(CreateTransactionType::class);
 
         $form->handleRequest($request);
@@ -50,13 +48,10 @@ final class CreateTransaction
 
                 $this->commandBus->dispatch($command);
 
-                /* @phpstan-ignore-next-line */
                 $this->session->getFlashBag()->add('success', 'Transaction prise en compte');
 
                 return new RedirectResponse($this->router->generate('list_transaction'));
             } catch (\Exception $e) {
-
-                /* @phpstan-ignore-next-line */
                 $this->session->getFlashBag()->add('danger', $e->getMessage());
             }
         }

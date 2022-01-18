@@ -4,8 +4,8 @@ declare(strict_types=1);
 
 namespace App\Core\Transaction\Domain\Exception;
 
-use Exception;
 use App\Shared\Transaction\Domain\TransactionId;
+use Exception;
 
 final class TransactionNotFound extends Exception
 {

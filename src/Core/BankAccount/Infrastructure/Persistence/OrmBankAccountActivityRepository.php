@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace App\Core\BankAccount\Infrastructure\Persistence;
 
+use App\Core\BankAccount\Domain\Exception\BankAccountActivityNotFound;
 use App\Core\BankAccount\Domain\Model\BankAccountActivity;
 use App\Core\BankAccount\Domain\Repository\BankAccountActivityRepository;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
@@ -26,11 +27,16 @@ final class OrmBankAccountActivityRepository extends ServiceEntityRepository imp
 
     public function get(int $id): BankAccountActivity
     {
-        // TODO: Implement get() method.
+        $bankAccountActivity = $this->find($id);
+        if (null == $bankAccountActivity) {
+            throw new BankAccountActivityNotFound($id);
+        }
+
+        return $bankAccountActivity;
     }
 
     public function list(): ?array
     {
-        // TODO: Implement list() method.
+        return $this->findAll();
     }
 }

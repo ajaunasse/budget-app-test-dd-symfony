@@ -5,8 +5,8 @@ declare(strict_types=1);
 namespace App\UserInterface\WebSite\Transaction\Action;
 
 use App\Core\Transaction\Application\Command\DeleteTransactionCommand;
-use Exception;
 use App\Shared\Transaction\Domain\TransactionId;
+use Exception;
 use Symfony\Component\HttpFoundation\RedirectResponse;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\RequestStack;

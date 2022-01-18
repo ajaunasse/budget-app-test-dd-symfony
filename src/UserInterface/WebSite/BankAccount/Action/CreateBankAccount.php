@@ -16,7 +16,6 @@ use Symfony\Component\Messenger\MessageBusInterface;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Component\Routing\RouterInterface;
 use Twig\Environment;
-use App\UserInterface\WebSite\Transaction\Form\CreateTransactionType;
 
 /**
  * @Route("/bank-account/add", name="add_bank_account")
@@ -37,7 +36,6 @@ final class CreateBankAccount
 
     public function __invoke(Request $request): Response
     {
-
         $form = $this->formFactory->create(CreateBankAccountType::class);
 
         $form->handleRequest($request);
@@ -50,13 +48,10 @@ final class CreateBankAccount
 
                 $this->commandBus->dispatch($command);
 
-                /* @phpstan-ignore-next-line */
                 $this->session->getFlashBag()->add('success', 'Compte bancaire créé');
 
                 return new RedirectResponse($this->router->generate('list_bank_account'));
             } catch (\Exception $e) {
-
-                /* @phpstan-ignore-next-line */
                 $this->session->getFlashBag()->add('danger', $e->getMessage());
             }
         }

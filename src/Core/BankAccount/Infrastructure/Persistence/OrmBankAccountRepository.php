@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace App\Core\BankAccount\Infrastructure\Persistence;
 
+use App\Core\BankAccount\Domain\Exception\BankAccountNotFound;
 use App\Core\BankAccount\Domain\Model\BankAccount;
 use App\Core\BankAccount\Domain\Repository\BankAccountRepository;
 use App\Shared\BankAccount\Domain\BankAccountId;
@@ -18,6 +19,7 @@ final class OrmBankAccountRepository extends ServiceEntityRepository implements 
     {
         parent::__construct($registry, BankAccount::class);
     }
+
     public function add(BankAccount $bankAccount): void
     {
         $this->_em->persist($bankAccount);
@@ -26,7 +28,13 @@ final class OrmBankAccountRepository extends ServiceEntityRepository implements 
 
     public function get(BankAccountId $bankAccountId): BankAccount
     {
-        // TODO: Implement get() method.
+        $bankAccount = $this->find($bankAccountId);
+
+        if (null == $bankAccount) {
+            throw new BankAccountNotFound($bankAccountId);
+        }
+
+        return $bankAccount;
     }
 
     public function list(): ?array
@@ -36,11 +44,9 @@ final class OrmBankAccountRepository extends ServiceEntityRepository implements 
 
     public function update(BankAccountId $bankAccountId): void
     {
-        // TODO: Implement update() method.
     }
 
     public function delete(BankAccountId $bankAccountId): void
     {
-        // TODO: Implement delete() method.
     }
 }

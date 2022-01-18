@@ -2,11 +2,17 @@
 
 namespace App\Tests\UserInterface\WebSite\Transaction\Action;
 
+use App\Infrastructure\Doctrine\DataFixtures\TransactionData;
 use App\Shared\Common\Domain\Uuid;
 use Symfony\Bundle\FrameworkBundle\Test\WebTestCase;
 
 final class ShowTransactionTest extends WebTestCase
 {
+    public function setUp(): void
+    {
+        parent::setUp();
+    }
+
     /**
      * @test
      */
@@ -14,13 +20,13 @@ final class ShowTransactionTest extends WebTestCase
     {
         $client = static::createClient();
 
-        $client->request('GET', '/transaction/show/dafefa83-9e8c-477f-a414-c036826c9997');
+        $client->request('GET', '/transaction/show/'.TransactionData::TRANSACTION_WITH_CREDIT_REF);
 
         $this->assertResponseIsSuccessful();
 
         $responseContent = $client->getResponse()->getContent();
 
-        $this->assertStringContainsString('Transaction n°dafefa83-9e8c-477f-a414-c036826c9997', $responseContent);
+        $this->assertStringContainsString('Transaction n°'.TransactionData::TRANSACTION_WITH_CREDIT_REF, $responseContent);
     }
 
     /**
@@ -32,12 +38,11 @@ final class ShowTransactionTest extends WebTestCase
 
         $uuid = Uuid::random();
 
-        $client->request('GET', '/transaction/show/8a11a0a7-0731-4b72-a5a4-18a5424738b3');
+        $client->request('GET', '/transaction/show/'.$uuid);
 
-       // $this->assertResponseStatusCodeSame(404);
+        $this->assertResponseStatusCodeSame(404);
 
         $responseContent = $client->getResponse()->getContent();
-        dd($responseContent);
-       // $this->assertStringContainsString('Transaction doesn\'t not exist for id '.$uuid, $responseContent);
+        $this->assertStringContainsString('Transaction doesn\'t not exist for id '.$uuid, $responseContent);
     }
 }

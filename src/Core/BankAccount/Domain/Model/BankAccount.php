@@ -4,12 +4,14 @@ declare(strict_types=1);
 
 namespace App\Core\BankAccount\Domain\Model;
 
+use App\Core\BankAccount\Domain\Event\BankAccountCreated;
 use App\Core\BankAccount\Domain\ValueObject\BankAccountType;
 use App\Shared\BankAccount\Domain\BankAccountId;
+use App\Shared\Common\Domain\Model\Aggregate;
 use App\Shared\Common\Domain\ValueObject\Amount;
 use DateTimeImmutable;
 
-final class BankAccount
+final class BankAccount extends Aggregate
 {
     private BankAccountId $id;
 
@@ -46,6 +48,12 @@ final class BankAccount
         $self->startBalance = $self->currentBalance = $startBalance;
         $self->mainAccount = $mainAccount;
         $self->createdAt = $self->updatedAt = new DateTimeImmutable();
+
+        $self->raise(new BankAccountCreated(
+            bankAccountId: $self->id,
+            startBalance: $self->startBalance,
+            occuredAt: $self->createdAt
+        ));
 
         return $self;
     }

@@ -3,6 +3,7 @@
 declare(strict_types=1);
 
 namespace App\Core\Transaction\Domain\Repository;
+
 use App\Core\Transaction\Domain\Exception\TransactionNotFound;
 use App\Core\Transaction\Domain\Model\Transaction;
 use App\Shared\Transaction\Domain\TransactionId;

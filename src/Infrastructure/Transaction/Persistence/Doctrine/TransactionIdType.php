@@ -22,10 +22,12 @@ final class TransactionIdType extends StringType
         return new TransactionId($value);
     }
 
-    public function convertToDatabaseValue($value, AbstractPlatform $platform): string
+    public function convertToDatabaseValue($value, AbstractPlatform $platform): ?string
     {
-        return $value;
+        if (null === $value) {
+            return null;
+        }
+
+        return $value->value();
     }
-
-
 }
