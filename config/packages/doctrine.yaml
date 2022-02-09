@@ -3,6 +3,7 @@ doctrine:
         url: '%env(resolve:DATABASE_URL)%'
         types:
             transaction_id: App\Infrastructure\Transaction\Persistence\Doctrine\TransactionIdType
+            category_id: App\Infrastructure\Transaction\Persistence\Doctrine\CategoryIdType
             bank_account_id: App\Infrastructure\BankAccount\Persistence\Doctrine\BankAccountIdType
             bank_account_type: App\Infrastructure\BankAccount\Persistence\Doctrine\BankAccountTypeType
             bank_account_activity_type: App\Infrastructure\BankAccount\Persistence\Doctrine\BankAccountActivityTypeType

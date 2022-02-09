@@ -22,7 +22,8 @@ final class CreateTransactionHandler implements CommandHandlerInterface
             name: $command->name(),
             amount: $command->amount()->toInt(),
             transactionDate: $command->transactionDate(),
-            type: $command->type()
+            type: $command->type(),
+            categoryId: $command->categoryId()
         );
 
         $this->transactionRepository

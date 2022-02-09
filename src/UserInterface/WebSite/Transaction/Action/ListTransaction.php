@@ -2,6 +2,7 @@
 
 namespace App\UserInterface\WebSite\Transaction\Action;
 
+use App\Core\Transaction\Application\ViewModel\TransactionListViewModel;
 use App\Core\Transaction\Domain\Repository\TransactionRepository;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
@@ -22,7 +23,7 @@ final class ListTransaction
     {
         return new Response(
             $this->templating->render('transaction/list.html.twig', [
-                'transactions' => $this->transactionRepository->list(),
+                'transactions' => TransactionListViewModel::fromRepositoryResult($this->transactionRepository->list()),
             ])
         );
     }

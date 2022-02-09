@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace App\Core\Transaction\Application\Command;
 
 use App\Core\Transaction\Domain\Model\Transaction;
+use App\Shared\BankAccount\Domain\CategoryId;
 use App\Shared\Common\Domain\Uuid;
 use App\Shared\Common\Domain\ValueObject\Amount;
 use App\Shared\Transaction\Domain\TransactionId;
@@ -17,7 +18,8 @@ final class CreateTransactionCommand
         private string $name,
         private Amount $amount,
         private DateTimeImmutable $transactionDate,
-        private string $type
+        private string $type,
+        private CategoryId $categoryId
     ) {
     }
 
@@ -27,6 +29,7 @@ final class CreateTransactionCommand
      *   amount: float,
      *   transactionDate: DateImmutable
      *   type: integer
+     *   category: Category
      * }
      *
      * @param array<string, mixed> $formData
@@ -34,13 +37,15 @@ final class CreateTransactionCommand
     public static function fromFormData(array $formData): self
     {
         $transactionId = new TransactionId(Uuid::random());
+        $catgory = $formData['category'];
 
         return new self(
             id: $transactionId,
             name: $formData['name'],
             amount: Amount::fromUnformattedValue((float) $formData['amount']),
             transactionDate: $formData['transactionDate'],
-            type: Transaction::TYPES[$formData['type']]
+            type: Transaction::TYPES[$formData['type']],
+            categoryId: $catgory->id()
         );
     }
 
@@ -67,5 +72,10 @@ final class CreateTransactionCommand
     public function type(): string
     {
         return $this->type;
+    }
+
+    public function categoryId(): CategoryId
+    {
+        return $this->categoryId;
     }
 }

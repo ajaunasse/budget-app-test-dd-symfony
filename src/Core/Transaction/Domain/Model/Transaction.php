@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace App\Core\Transaction\Domain\Model;
 
 use App\Core\Transaction\Domain\Exception\TransactionTypeNotExist;
+use App\Shared\BankAccount\Domain\CategoryId;
 use App\Shared\Common\Domain\ValueObject\Amount;
 use App\Shared\Transaction\Domain\TransactionId;
 use DateTimeImmutable;
@@ -29,6 +30,8 @@ final class Transaction
 
     private string $type;
 
+    private CategoryId $categoryId;
+
     private function __construct()
     {
     }
@@ -38,7 +41,8 @@ final class Transaction
         string $name,
         int $amount,
         DateTimeImmutable $transactionDate,
-        string $type
+        string $type,
+        CategoryId $categoryId
     ): self {
         $self = new self();
 
@@ -52,6 +56,7 @@ final class Transaction
         }
 
         $self->type = $type;
+        $self->categoryId = $categoryId;
 
         return $self;
     }
@@ -86,5 +91,10 @@ final class Transaction
     public function transactionDate(): DateTimeImmutable
     {
         return $this->transactionDate;
+    }
+
+    public function categoryId(): CategoryId
+    {
+        return $this->categoryId;
     }
 }

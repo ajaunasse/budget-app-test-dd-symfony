@@ -1,0 +1,62 @@
+<?php
+
+declare(strict_types=1);
+
+namespace DoctrineMigrations;
+
+use Doctrine\DBAL\Schema\Schema;
+use Doctrine\Migrations\AbstractMigration;
+
+/**
+ * Auto-generated Migration: Please modify to your needs!
+ */
+final class Version20220208142532 extends AbstractMigration
+{
+    public function getDescription(): string
+    {
+        return '';
+    }
+
+    public function up(Schema $schema): void
+    {
+        // this up() migration is auto-generated, please modify it to your needs
+        $this->addSql('CREATE SEQUENCE category_seq INCREMENT BY 1 MINVALUE 1 START 1');
+        $this->addSql('CREATE TABLE category (id INT NOT NULL, name VARCHAR(50) NOT NULL, PRIMARY KEY(id))');
+        $this->addSql('ALTER TABLE bank_account ALTER id TYPE VARCHAR(36)');
+        $this->addSql('ALTER TABLE bank_account ALTER id DROP DEFAULT');
+        $this->addSql('ALTER TABLE bank_account ALTER type TYPE VARCHAR(20)');
+        $this->addSql('ALTER TABLE bank_account ALTER type DROP DEFAULT');
+        $this->addSql('ALTER TABLE bank_account_activity ALTER bank_account_id TYPE VARCHAR(36)');
+        $this->addSql('ALTER TABLE bank_account_activity ALTER bank_account_id DROP DEFAULT');
+        $this->addSql('ALTER TABLE bank_account_activity ALTER transaction_id TYPE VARCHAR(36)');
+        $this->addSql('ALTER TABLE bank_account_activity ALTER transaction_id DROP DEFAULT');
+        $this->addSql('ALTER TABLE bank_account_activity ALTER type TYPE VARCHAR(20)');
+        $this->addSql('ALTER TABLE bank_account_activity ALTER type DROP DEFAULT');
+        $this->addSql('ALTER TABLE transaction ADD category_id INT NOT NULL');
+        $this->addSql('ALTER TABLE transaction ALTER id TYPE VARCHAR(36)');
+        $this->addSql('ALTER TABLE transaction ALTER id DROP DEFAULT');
+        $this->addSql('CREATE INDEX category_id_idx ON transaction (category_id)');
+    }
+
+    public function down(Schema $schema): void
+    {
+        // this down() migration is auto-generated, please modify it to your needs
+        $this->addSql('CREATE SCHEMA public');
+        $this->addSql('DROP SEQUENCE category_seq CASCADE');
+        $this->addSql('DROP TABLE category');
+        $this->addSql('DROP INDEX category_id_idx');
+        $this->addSql('ALTER TABLE transaction DROP category_id');
+        $this->addSql('ALTER TABLE transaction ALTER id TYPE VARCHAR(36)');
+        $this->addSql('ALTER TABLE transaction ALTER id DROP DEFAULT');
+        $this->addSql('ALTER TABLE bank_account ALTER id TYPE VARCHAR(36)');
+        $this->addSql('ALTER TABLE bank_account ALTER id DROP DEFAULT');
+        $this->addSql('ALTER TABLE bank_account ALTER type TYPE VARCHAR(20)');
+        $this->addSql('ALTER TABLE bank_account ALTER type DROP DEFAULT');
+        $this->addSql('ALTER TABLE bank_account_activity ALTER bank_account_id TYPE VARCHAR(36)');
+        $this->addSql('ALTER TABLE bank_account_activity ALTER bank_account_id DROP DEFAULT');
+        $this->addSql('ALTER TABLE bank_account_activity ALTER transaction_id TYPE VARCHAR(36)');
+        $this->addSql('ALTER TABLE bank_account_activity ALTER transaction_id DROP DEFAULT');
+        $this->addSql('ALTER TABLE bank_account_activity ALTER type TYPE VARCHAR(20)');
+        $this->addSql('ALTER TABLE bank_account_activity ALTER type DROP DEFAULT');
+    }
+}

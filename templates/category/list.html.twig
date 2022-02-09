@@ -1,0 +1,51 @@
+{% extends 'base.html.twig' %}
+
+{% block title %} Transactions {% endblock %}
+
+{% block title_page %} Liste des Categories{% endblock %}
+{% block action %}
+    <a href="{{ path('add_category') }}" class="btn btn-success float-end">
+        <i class="fas fa-plus"></i>
+        Ajouter une category
+    </a>
+{% endblock %}
+{% block content %}
+
+
+        <table class="table">
+            <thead>
+            <tr>
+                <th>
+                    Id
+                </th>
+                <th>
+                    Name
+                </th>
+                <th>
+                    Action
+                </th>
+            </tr>
+            </thead>
+            <tbody>
+            {% for category in categories %}
+            <tr>
+                <td>{{ category.id }}</td>
+                <td>{{ category.name }}</td>
+                <td>
+                    <a href="#" class="btn btn-sm btn-outline-primary">
+                        <i class="fas fa-eye"></i>
+                        Détail
+                    </a>
+
+                    <a href="#" class="btn btn-sm btn-outline-danger">
+                        <i class="fas fa-trash-alt"></i>
+                        Supprimer
+                    </a>
+                </td>
+            </tr>
+            {% else %}
+                <tr><td>Pas de categories</td></tr>
+            {% endfor %}
+            </tbody>
+        </table>
+{% endblock %}

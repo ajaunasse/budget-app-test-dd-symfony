@@ -16,6 +16,10 @@ services:
         resource: '../src/UserInterface/WebSite/Transaction/Action/'
         tags: [ 'controller.service_arguments']
 
+    App\UserInterface\WebSite\Category\Action\:
+        resource: '../src/UserInterface/WebSite/Category/Action/'
+        tags: [ 'controller.service_arguments' ]
+
     App\UserInterface\WebSite\BankAccount\Action\:
         resource: '../src/UserInterface/WebSite/BankAccount/Action/'
         tags: [ 'controller.service_arguments' ]

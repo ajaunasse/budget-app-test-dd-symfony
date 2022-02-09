@@ -3,10 +3,12 @@
 namespace App\Core\Transaction\Infrastructure\Persistence;
 
 use App\Core\Transaction\Domain\Exception\TransactionNotFound;
+use App\Core\Transaction\Domain\Model\Category;
 use App\Core\Transaction\Domain\Model\Transaction;
 use App\Core\Transaction\Domain\Repository\TransactionRepository;
 use App\Shared\Transaction\Domain\TransactionId;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
+use Doctrine\ORM\Query\Expr\Join;
 use Doctrine\Persistence\ManagerRegistry;
 
 /**
@@ -46,7 +48,12 @@ final class OrmTransactionRepository extends ServiceEntityRepository implements 
      */
     public function list(): ?array
     {
-        return $this->findAll();
+        return $this->createQueryBuilder('t')
+            ->select('t as transaction, c.name as categoryName')
+            ->innerJoin(Category::class, 'c', Join::WITH, 'c.id = t.categoryId')
+            ->getQuery()
+            ->getResult()
+        ;
     }
 
     public function delete(TransactionId $transactionId): void

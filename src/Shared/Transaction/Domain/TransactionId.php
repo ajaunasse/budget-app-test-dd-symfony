@@ -8,4 +8,5 @@ use App\Shared\Common\Domain\Uuid;
 
 final class TransactionId extends Uuid
 {
+
 }

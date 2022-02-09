@@ -6,6 +6,10 @@ transaction_actions:
     resource: ../../src/UserInterface/WebSite/Transaction/Action/
     type: annotation
 
+category_actions:
+    resource: ../../src/UserInterface/WebSite/Category/Action/
+    type: annotation
+
 bank_account_actions:
     resource: ../../src/UserInterface/WebSite/BankAccount/Action/
     type: annotation
