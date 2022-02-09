@@ -6,6 +6,7 @@ namespace App\Tests\Core\Transaction\Model;
 
 use App\Core\Transaction\Domain\Exception\TransactionTypeNotExist;
 use App\Core\Transaction\Domain\Model\Transaction;
+use App\Shared\BankAccount\Domain\CategoryId;
 use App\Shared\Common\Domain\Uuid;
 use App\Shared\Transaction\Domain\TransactionId;
 use PHPUnit\Framework\TestCase;
@@ -24,7 +25,8 @@ final class TransactionTest extends TestCase
             name: 'Transaction test',
             amount: 10000,
             transactionDate: new \DateTimeImmutable(),
-            type: Transaction::CREDIT
+            type: Transaction::CREDIT,
+            categoryId: new CategoryId(1)
         );
 
         $this->assertSame('Transaction test', $transaction->name());
@@ -49,7 +51,8 @@ final class TransactionTest extends TestCase
             name: 'Transaction test',
             amount: 10000,
             transactionDate: new \DateTimeImmutable(),
-            type: 'Unknown type'
+            type: 'Unknown type',
+            categoryId: new CategoryId(1)
         );
     }
 }

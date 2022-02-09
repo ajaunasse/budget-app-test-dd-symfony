@@ -3,6 +3,7 @@
 namespace App\Infrastructure\Doctrine\DataFixtures;
 
 use App\Core\Transaction\Domain\Model\Transaction;
+use App\Shared\BankAccount\Domain\CategoryId;
 use App\Shared\Common\Domain\Uuid;
 use App\Shared\Transaction\Domain\TransactionId;
 use DateTimeImmutable;
@@ -23,7 +24,8 @@ class TransactionData extends Fixture
             name: 'Grocery bill',
             amount: 12555,
             transactionDate: new DateTimeImmutable(),
-            type: Transaction::DEBIT
+            type: Transaction::DEBIT,
+            categoryId: new CategoryId(1)
         );
 
         $transactionWithCredit = Transaction::createFromCommand(
@@ -31,7 +33,8 @@ class TransactionData extends Fixture
             name: 'Salary',
             amount: 200000,
             transactionDate: new DateTimeImmutable(),
-            type: Transaction::CREDIT
+            type: Transaction::CREDIT,
+            categoryId: new CategoryId(2)
         );
 
         $manager->persist($transactionWithDebit);

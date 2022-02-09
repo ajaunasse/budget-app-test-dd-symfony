@@ -33,17 +33,24 @@
             <main role="main" class="col-md-9 ms-sm-auto col-lg-10 px-md-4">
                 <div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3 border-bottom">
 
-                        <h1 class="h2">{% block title_page %}Dashboard{% endblock %}</h1>
+                    <h1 class="h2">{% block title_page %}Dashboard{% endblock %}</h1>
 
-
-                    <div class="btn-toolbar mb-2 mb-md-0">
-                        {% block action %}
-                        {% endblock %}
-                    </div>
+                    {% for label, messages in app.flashes(['success', 'warning', 'danger']) %}
+                        {% for message in messages %}
+                            <div class="alert alert-{{ label }}">
+                                {{ message }}
+                            </div>
+                        {% endfor %}
+                    {% endfor %}
 
 
 
                 </div>
+                <div class="btn-toolbar mb-2 mb-md-0">
+                    {% block action %}
+                    {% endblock %}
+                </div>
+                
                 {% block content %}
                 {% endblock %}
             </main>

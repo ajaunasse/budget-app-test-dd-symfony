@@ -3,6 +3,9 @@
 namespace App\Tests\UserInterface\WebSite\Transaction\Action;
 
 use App\Core\Transaction\Application\Command\CreateTransactionCommand;
+use App\Core\Transaction\Domain\Model\Category;
+use App\Infrastructure\Doctrine\DataFixtures\CategoryData;
+use App\Shared\BankAccount\Domain\CategoryId;
 use DateTimeImmutable;
 use Symfony\Bundle\FrameworkBundle\Test\WebTestCase;
 use Symfony\Component\Messenger\TraceableMessageBus;
@@ -47,12 +50,17 @@ final class CreateTransactionTest extends WebTestCase
             'create_transaction[amount]' => $transactionAmount,
             'create_transaction[transactionDate]' => $transactionDate->format('Y-m-d'),
             'create_transaction[type]' => $transactionType,
+            'create_transaction[category]' => 1,
         ];
+
         $formData = [
             'name' => $transactionName,
             'amount' => $transactionAmount,
             'transactionDate' => $transactionDate,
             'type' => $transactionType,
+            'category' => Category::createFromViewModel(
+                new CategoryId(1), CategoryData::FOOD_CATEGORY
+            ),
         ];
 
         $client->request('GET', '/transaction/create');
